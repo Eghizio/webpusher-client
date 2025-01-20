@@ -1,8 +1,8 @@
 import { Header } from "./components/Header/Header";
 import { Page, useNavigation } from "./context/NavigationContext";
 
-import { HomePage } from "./pages/Home";
 import { NotFoundPage } from "./pages/NotFound";
+import { HomePage } from "./pages/Home";
 import { OnboardingPage } from "./pages/Onboarding";
 
 const Router = () => {
