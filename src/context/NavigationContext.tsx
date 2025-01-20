@@ -10,6 +10,7 @@ import {
 export enum Page {
   Home = "Home",
   Onboarding = "Onboarding",
+  Settings = "Settings",
 }
 
 export type NavigationContextValue = {

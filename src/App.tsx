@@ -4,6 +4,7 @@ import { Page, useNavigation } from "./context/NavigationContext";
 import { NotFoundPage } from "./pages/NotFound";
 import { HomePage } from "./pages/Home";
 import { OnboardingPage } from "./pages/Onboarding";
+import { SettingsPage } from "./pages/Settings";
 
 const Router = () => {
   const { page } = useNavigation();
@@ -14,6 +15,9 @@ const Router = () => {
     }
     case Page.Onboarding: {
       return <OnboardingPage />;
+    }
+    case Page.Settings: {
+      return <SettingsPage />;
     }
     default: {
       return <NotFoundPage />;
