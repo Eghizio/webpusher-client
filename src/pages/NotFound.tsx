@@ -1,5 +1,5 @@
 interface Props {}
 
 export const NotFoundPage = ({}: Props) => {
-  return <main>NotFoundPage</main>;
+  return <main>NotFound Page</main>;
 };

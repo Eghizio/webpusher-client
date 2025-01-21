@@ -6,14 +6,13 @@ import { useCallback } from "react";
 const pages = Object.values(Page);
 
 export const Header = () => {
-  const { navigateToHome } = useNavigation();
+  const { navigateTo } = useNavigation();
+
+  const goHome = () => navigateTo(Page.Dashboard);
 
   return (
     <TopBar className="justify-between">
-      <Logo
-        className="cursor-pointer hover:brightness-95"
-        onClick={navigateToHome}
-      >
+      <Logo className="cursor-pointer hover:brightness-95" onClick={goHome}>
         Web Pusher
       </Logo>
 
@@ -47,11 +46,11 @@ const LinkButton = classed.a(
 );
 
 export const PageButton = ({ page }: { page: Page }) => {
-  const { page: currentPage, navigateToPage } = useNavigation();
+  const { page: currentPage, navigateTo } = useNavigation();
 
   const active = currentPage === page;
 
-  const navigate = useCallback(() => navigateToPage(page), [page]);
+  const navigate = useCallback(() => navigateTo(page), [page]);
 
   return (
     <LinkButton active={active} onClick={navigate}>

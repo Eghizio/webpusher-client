@@ -1,5 +1,5 @@
 interface Props {}
 
 export const OnboardingPage = ({}: Props) => {
-  return <main>OnboardingPage</main>;
+  return <main>Onboarding Page</main>;
 };

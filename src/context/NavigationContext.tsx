@@ -8,16 +8,16 @@ import {
 } from "react";
 
 export enum Page {
-  Home = "Home",
   Onboarding = "Onboarding",
+  Dashboard = "Dashboard",
+  Users = "Users",
+  Notifications = "Notifications",
   Settings = "Settings",
 }
 
 export type NavigationContextValue = {
   page: Page;
-  navigateToHome: () => void;
-  navigateToOnboarding: () => void;
-  navigateToPage: (page: Page) => void;
+  navigateTo: (page: Page) => void;
 };
 
 const NavigationContext = createContext<NavigationContextValue | undefined>(
@@ -41,28 +41,16 @@ type WithChildren = {
 export const NavigationContextProvider = ({ children }: WithChildren) => {
   // Todo: Check if already Registered.
   // Registered -> Home / NotRegistered -> Onboarding
-  const [page, setPage] = useState(Page.Home);
+  const [page, setPage] = useState(Page.Dashboard);
 
-  const navigateToPage = useCallback((page: Page) => setPage(page), [setPage]);
-
-  const navigateToHome = useCallback(
-    () => navigateToPage(Page.Home),
-    [navigateToPage]
-  );
-
-  const navigateToOnboarding = useCallback(
-    () => navigateToPage(Page.Onboarding),
-    [navigateToPage]
-  );
+  const navigateTo = useCallback((page: Page) => setPage(page), [setPage]);
 
   const value = useMemo(
     () => ({
       page,
-      navigateToPage,
-      navigateToHome,
-      navigateToOnboarding,
+      navigateTo,
     }),
-    [page, navigateToPage, navigateToHome, navigateToOnboarding]
+    [page, navigateTo]
   );
 
   return (

@@ -1,5 +1,5 @@
 interface Props {}
 
 export const SettingsPage = ({}: Props) => {
-  return <main>SettingsPage</main>;
+  return <main>Settings Page</main>;
 };
