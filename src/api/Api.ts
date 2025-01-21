@@ -1,5 +1,5 @@
 import { HttpClient } from "./HttpClient";
-import type { PushSubscription } from "../model";
+import type { PushSubscription } from "@/model";
 
 const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
 const headers = { "Content-Type": "application/json" };

@@ -1,7 +1,7 @@
 import { ReactNode, useCallback } from "react";
 import { Home, Users, Bell, Settings } from "lucide-react";
 // import { classed } from "@tw-classed/react";
-import { Page, useNavigation } from "../../context/NavigationContext";
+import { Page, useNavigation } from "@/context/NavigationContext";
 
 // Todo: Decouple.
 
