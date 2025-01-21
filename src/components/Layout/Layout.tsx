@@ -44,6 +44,7 @@ const avatars = Array.from({ length: 8 }, (_, i) => i + 1).flatMap((n) => [
 const avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
 export const Layout = ({ children }: { children: ReactNode }) => {
+  // Todo: Clicking Logo navigates to Home/Dashboard, Clicking User navigates to Settings
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar for desktop */}
@@ -85,7 +86,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         <header className="bg-white shadow-sm p-4 flex justify-between items-center">
-          <h2 className="text-xl font-semibold md:hidden">WebPush Demo</h2>
+          <h1 className="text-xl font-semibold md:hidden">WebPush Demo</h1>
 
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600">Welcome, User</span>
@@ -102,7 +103,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around p-2">
         <Link page={Page.Dashboard} mobile>
           <Home size={24} />
-          <span className="text-xs">Home</span>
+          <span className="text-xs">Dashboard</span>
         </Link>
         <Link page={Page.Users} mobile>
           <Users size={24} />

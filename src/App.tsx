@@ -1,21 +1,21 @@
-// import { Header } from "./components/Header/Header";
-import { Page, useNavigation } from "./context/NavigationContext";
+import { Page, useNavigation } from "@/context/NavigationContext";
 
-import { Layout } from "./components/Layout/Layout";
+import { Layout } from "@/components/Layout/Layout";
 
-import { NotFoundPage } from "./pages/NotFound";
-import { OnboardingPage } from "./pages/Onboarding";
+import { NotFoundPage } from "@/pages/NotFound";
+import { OnboardingPage } from "@/pages/Onboarding";
 
-import { DashboardPage } from "./pages/Dashboard";
-import { NotificationsPage } from "./pages/Notifications";
-import { UsersPage } from "./pages/Users";
-import { SettingsPage } from "./pages/Settings";
+import { DashboardPage } from "@/pages/Dashboard";
+import { NotificationsPage } from "@/pages/Notifications";
+import { UsersPage } from "@/pages/Users";
+import { SettingsPage } from "@/pages/Settings";
 
 const Router = () => {
   const { page } = useNavigation();
 
   switch (page) {
     case Page.Onboarding: {
+      // Omit <Layout/> but keep single instance for other pages.
       return <OnboardingPage />;
     }
 
@@ -40,7 +40,6 @@ const Router = () => {
 
 export const App = () => (
   <>
-    {/* <Header /> */}
     <Layout>
       <Router />
     </Layout>
