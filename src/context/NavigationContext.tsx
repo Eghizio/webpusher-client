@@ -1,13 +1,16 @@
+import { Api } from "@/api/Api";
 import {
   createContext,
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
 
 export enum Page {
+  Splashscreen = "Splashscreen",
   Onboarding = "Onboarding",
   Dashboard = "Dashboard",
   Users = "Users",
@@ -41,9 +44,23 @@ type WithChildren = {
 export const NavigationContextProvider = ({ children }: WithChildren) => {
   // Todo: Check if already Registered.
   // Registered -> Home / NotRegistered -> Onboarding
-  const [page, setPage] = useState(Page.Dashboard);
+  const [page, setPage] = useState(Page.Splashscreen);
 
   const navigateTo = useCallback((page: Page) => setPage(page), [setPage]);
+
+  useEffect(() => {
+    Api.getCurrentUser()
+      // .then(() => navigateTo(Page.Dashboard))
+      // .catch(() => navigateTo(Page.Onboarding));
+      .then((data) => {
+        console.log("Success -> Dashboard", data);
+        navigateTo(Page.Dashboard);
+      })
+      .catch((error) => {
+        console.log("Failure -> Onboarding", error);
+        navigateTo(Page.Onboarding);
+      });
+  }, []);
 
   const value = useMemo(
     () => ({

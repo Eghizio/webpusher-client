@@ -1,5 +1,1 @@
-interface Props {}
-
-export const NotFoundPage = ({}: Props) => {
-  return <main>NotFound Page</main>;
-};
+export const NotFoundPage = () => <main>NotFound Page</main>;

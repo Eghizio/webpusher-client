@@ -1,7 +1,8 @@
 import { HttpClient } from "./HttpClient";
 import type { PushSubscription } from "@/model";
 
-const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
+// const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
+const API_URL = "http://localhost:3000/api/v1";
 const headers = { "Content-Type": "application/json" };
 
 export const Http = new HttpClient(API_URL, headers);
@@ -29,5 +30,9 @@ export class Api {
 
   static async getUsers() {
     return Http.get("/users/all");
+  }
+
+  static async getCurrentUser() {
+    return Http.get("/users/me");
   }
 }

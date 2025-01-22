@@ -1,14 +1,10 @@
 import { Bell } from "lucide-react";
 
-interface Props {}
-
-export const NotificationsPage = ({}: Props) => {
-  return (
-    <main>
-      <Title />
-    </main>
-  );
-};
+export const NotificationsPage = () => (
+  <main>
+    <Title />
+  </main>
+);
 
 const Title = () => (
   <h2 className="text-2xl flex items-center gap-2 font-bold">

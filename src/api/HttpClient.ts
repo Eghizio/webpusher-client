@@ -11,28 +11,32 @@ export class HttpClient {
       headers: this.headers,
       method,
       body: JSON.stringify(body),
+      credentials: "include", // Todo: Configure.
     })
+      .then((response) => {
+        if (response.ok) return response;
+        throw new Error(response.statusText);
+      })
       .then((response) =>
         response.headers.get("Content-Type")?.includes("application/json")
           ? response.json()
           : response.text()
-      )
-      .catch(console.error);
+      );
   }
 
-  async get(endpoint: string) {
+  async get<Response>(endpoint: string): Promise<Response> {
     return this.request(endpoint);
   }
 
-  async post<T>(endpoint: string, body: T) {
+  async post<Response, Body>(endpoint: string, body: Body): Promise<Response> {
     return this.request(endpoint, "POST", body);
   }
 
-  async patch<T>(endpoint: string, body: T) {
+  async patch<Response, Body>(endpoint: string, body: Body): Promise<Response> {
     return this.request(endpoint, "PATCH", body);
   }
 
-  async delete(endpoint: string) {
+  async delete<Response>(endpoint: string): Promise<Response> {
     return this.request(endpoint, "DELETE");
   }
 }
