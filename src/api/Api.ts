@@ -1,11 +1,14 @@
 import { HttpClient } from "./HttpClient";
 import type { PushSubscription } from "@/model";
+import { MockedApi } from "./MockedApi";
 
 // const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
 const API_URL = "http://localhost:3000/api/v1";
 const headers = { "Content-Type": "application/json" };
 
 const Http = new HttpClient(API_URL, headers);
+
+type User = { username: string };
 
 class Api {
   static async subscribe(subscription: PushSubscription) {
@@ -25,7 +28,7 @@ class Api {
   }
 
   static async registerUser(username: string) {
-    return Http.post("/users/register", { username });
+    return Http.post<User, User>("/users/register", { username });
   }
 
   static async getUsers() {
@@ -37,5 +40,6 @@ class Api {
   }
 }
 
-// export { Api };
-export { MockedApi as Api } from "./MockedApi";
+const mocksEnabled = true;
+const ApiClass = mocksEnabled ? MockedApi : Api;
+export { ApiClass as Api };
