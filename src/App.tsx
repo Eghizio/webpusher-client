@@ -11,6 +11,7 @@ import { NotificationsPage } from "@/pages/Notifications";
 import { UsersPage } from "@/pages/Users";
 import { SettingsPage } from "@/pages/Settings";
 
+// Poke Feature.
 const Router = () => {
   const { page } = useNavigation();
 
@@ -43,10 +44,15 @@ const Router = () => {
   }
 };
 
-export const App = () => (
-  <>
+export const App = () => {
+  const { page } = useNavigation();
+  const withoutLayout = [Page.Splashscreen, Page.Onboarding].includes(page);
+
+  if (withoutLayout) return <Router />;
+
+  return (
     <Layout>
       <Router />
     </Layout>
-  </>
-);
+  );
+};

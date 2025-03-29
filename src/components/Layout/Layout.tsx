@@ -2,6 +2,7 @@ import { ReactNode, useCallback } from "react";
 import { Home, Users, Bell, Settings } from "lucide-react";
 // import { classed } from "@tw-classed/react";
 import { Page, useNavigation } from "@/context/NavigationContext";
+import { useUser } from "@/context/UserContext";
 
 // Todo: Decouple.
 
@@ -44,6 +45,8 @@ const avatars = Array.from({ length: 8 }, (_, i) => i + 1).flatMap((n) => [
 const avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
 export const Layout = ({ children }: { children: ReactNode }) => {
+  const { user } = useUser();
+
   // Todo: Clicking Logo navigates to Home/Dashboard, Clicking User navigates to Settings
   return (
     <div className="flex h-screen bg-gray-100">
@@ -89,7 +92,9 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           <h1 className="text-xl font-semibold md:hidden">WebPush Demo</h1>
 
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-600">Welcome, User</span>
+            <span className="text-sm text-gray-600">
+              Welcome, {user?.username ?? "User"}
+            </span>
             <div className="w-8 h-8 bg-gray-300 rounded-full overflow-hidden">
               <img src={avatar} alt="User avatar" />
             </div>
