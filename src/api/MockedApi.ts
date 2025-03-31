@@ -44,4 +44,8 @@ export class MockedApi {
     await sleep();
     return Http.get("/users/me");
   }
+
+  static async pokeUser(_userId: string) {
+    await sleep();
+  }
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from "./HttpClient";
-import type { PushSubscription } from "@/model";
+// import type { PushSubscription } from "@/model";
 import { MockedApi } from "./MockedApi";
 
 // const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
@@ -38,8 +38,12 @@ class Api {
   static async getCurrentUser() {
     return Http.get("/users/me");
   }
+
+  static async pokeUser(userId: string) {
+    return Http.post(`/pokes/${userId}`, undefined);
+  }
 }
 
-const mocksEnabled = true;
+const mocksEnabled = false;
 const ApiClass = mocksEnabled ? MockedApi : Api;
 export { ApiClass as Api };
