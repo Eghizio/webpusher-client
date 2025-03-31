@@ -4,12 +4,13 @@ import { Pointer } from "lucide-react";
 // import { Page, useNavigation } from "@/context/NavigationContext";
 import { Button } from "./Button";
 import type { User } from "./types";
+import { Api } from "@/api/Api";
 
 interface Props {
   user: User;
 }
 
-const truncateName = (name: string, maxLength = 18) =>
+const truncateName = (name: string, maxLength = 24) =>
   name.length > maxLength ? `${name.slice(0, maxLength)}...` : name;
 
 // Todo: Do we need message button here tho?
@@ -17,8 +18,9 @@ export const UserTile = ({ user }: Props) => {
   const [isPokeDisabled, setIsPokeDisabled] = useState(false); // set for single user.
   // const { navigateTo } = useNavigation();
 
-  const poke = (_userId: number) => {
+  const poke = (userId: string) => {
     setIsPokeDisabled(true);
+    Api.pokeUser(userId);
     setTimeout(() => setIsPokeDisabled(false), 3_000);
   };
 
@@ -28,8 +30,8 @@ export const UserTile = ({ user }: Props) => {
 
   return (
     <li className="flex items-center justify-between py-2">
-      <span className="text-ellipsis max-w-[160px]">
-        {truncateName(user.name)}
+      <span className="text-ellipsis max-w-[240px]">
+        {truncateName(user.username)}
       </span>
 
       <div className="flex gap-2">

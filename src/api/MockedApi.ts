@@ -1,3 +1,4 @@
+import { User } from "@/components/UsersList/types";
 import { HttpClient } from "./HttpClient";
 
 // const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
@@ -32,12 +33,12 @@ export class MockedApi {
   }
 
   static async registerUser(username: string) {
-    return mockResponse({ username });
+    return mockResponse({ id: "42", username });
   }
 
   static async getUsers() {
     await sleep();
-    return Http.get("/users/all");
+    return Http.get<User[]>("/users/all");
   }
 
   static async getCurrentUser() {

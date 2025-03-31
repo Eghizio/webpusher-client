@@ -1,4 +1,5 @@
 import { Api } from "@/api/Api";
+import { User } from "@/components/UsersList/types";
 import {
   createContext,
   ReactNode,
@@ -7,11 +8,6 @@ import {
   useMemo,
   useState,
 } from "react";
-
-type User = {
-  //   id: string;
-  username: string;
-};
 
 export type UserContextValue = {
   user: User | null;

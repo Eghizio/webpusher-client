@@ -1,14 +1,13 @@
 import { HttpClient } from "./HttpClient";
 // import type { PushSubscription } from "@/model";
 import { MockedApi } from "./MockedApi";
+import { User } from "@/components/UsersList/types";
 
 // const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
 const API_URL = "http://localhost:3000/api/v1";
 const headers = { "Content-Type": "application/json" };
 
 const Http = new HttpClient(API_URL, headers);
-
-type User = { username: string };
 
 class Api {
   static async subscribe(subscription: PushSubscription) {
@@ -28,11 +27,13 @@ class Api {
   }
 
   static async registerUser(username: string) {
-    return Http.post<User, User>("/users/register", { username });
+    return Http.post<User, { username: string }>("/users/register", {
+      username,
+    });
   }
 
   static async getUsers() {
-    return Http.get("/users/all");
+    return Http.get<User[]>("/users/all");
   }
 
   static async getCurrentUser() {
