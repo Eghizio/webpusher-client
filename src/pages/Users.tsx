@@ -1,8 +1,31 @@
 import { Users } from "lucide-react";
+import { UsersList } from "@/components/UsersList/UsersList";
+
+const names = [
+  "Alice",
+  "Bob",
+  "Charlie",
+  "Diana",
+  "Ethan",
+  "Fiona",
+  "George",
+  "Hannah",
+  "Isaac",
+  "Julia",
+  "Kevin",
+  "Luna",
+  "Michael",
+  "Nina",
+  "Oscar",
+  "Penelope",
+  "VeryLongName".repeat(3),
+];
+const users = names.map((name, id) => ({ id, name }));
 
 export const UsersPage = () => (
-  <main>
+  <main className="overflow-y-scroll">
     <Title />
+    <UsersList users={users} />
   </main>
 );
 
