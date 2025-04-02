@@ -1,32 +1,29 @@
 import { useState } from "react";
 import { Megaphone } from "lucide-react";
-// import { MessageCircleHeart } from "lucide-react";
 import { Title } from "@/components/Title/Title";
 import { Api } from "@/api/Api";
 import { useUsers } from "@/hooks/useUsers";
 
-interface Props {}
+const onBroadcast = async (recipient: string, message: string) => {
+  if (recipient === "global") {
+    return Api.broadcast(message).then(console.log).catch(console.error);
+  }
 
-export const Broadcast = ({}: Props) => {
+  return Api.broadcastToUser(recipient, message)
+    .then(console.log)
+    .catch(console.error);
+};
+
+export const Broadcast = () => {
   const { data: users } = useUsers();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const onBroadcast = async (recipient: string, message: string) => {
-    if (recipient === "global") {
-      return Api.broadcast(message).then(console.log).catch(console.error);
-    }
-
-    return Api.broadcastToUser(recipient, message)
-      .then(console.log)
-      .catch(console.error);
-  };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
 
-    // Todo: Refactor.
     event.preventDefault();
     const form = event.target as HTMLFormElement;
+
     // @ts-ignore
     const recipient = form.elements["recipient"].value;
     // @ts-ignore
@@ -74,7 +71,7 @@ export const Broadcast = ({}: Props) => {
 
           <button
             type="submit"
-            className="w-full bg-black text-white p-2 rounded-md  disabled:bg-gray-500 disabled:brightness-50"
+            className="w-full bg-blue-500 text-white p-2 rounded-md  disabled:bg-gray-500 disabled:brightness-50"
             disabled={isSubmitting}
           >
             Broadcast

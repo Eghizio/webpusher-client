@@ -51,7 +51,7 @@ export const OnboardingPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-black text-white p-2 rounded-md  disabled:bg-gray-500 disabled:brightness-50"
+            className="w-full bg-blue-500 text-white p-2 rounded-md disabled:bg-gray-500 disabled:brightness-50"
             disabled={isSubmitting}
           >
             Continue
