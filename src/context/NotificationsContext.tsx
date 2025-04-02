@@ -75,6 +75,7 @@ export const NotificationsContextProvider = ({ children }: WithChildren) => {
   const unsubscribe = useCallback(async () => {
     const subscription = await WebPush.getSubscription();
     return WebPush.unsubscribe().then(() => {
+      setIsSubscribed(false);
       if (subscription) return Api.unsubscribe(subscription);
     });
   }, []);
