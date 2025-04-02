@@ -1,42 +1,52 @@
 import { BellDot } from "lucide-react";
-import { Title } from "../Title/Title";
-import { WebPush } from "@/lib/webpush/WebPush";
-import { useEffect, useState } from "react";
+import { Title } from "@/components/Title/Title";
+import { useNotifications } from "@/context/NotificationsContext";
+import { classed } from "@tw-classed/react";
 
 interface Props {}
 
 export const NotificationSettings = ({}: Props) => {
-  // TODO: Notification Context & Hooks for keeping the state.
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  useEffect(() => {
-    WebPush.getSubscription().then((subscription) =>
-      setIsSubscribed(Boolean(subscription))
-    );
-  }, []);
+  const { isSupported, isUserPermissionGranted, isSubscribed } =
+    useNotifications();
 
   return (
     <article>
       <Title left={<BellDot size={26} />}>Notification Settings</Title>
 
-      <section className="flex flex-col gap-2 py-2">
-        <div className="space-y-2">
-          <h4 className="font-bold text-xl">Permissions section</h4>
-          <div>
-            Current Notification permission status:
-            {WebPush.isUserPermissionGranted() ? " ✅" : " ❌"}
-          </div>
-          <div>
-            Enable permissions btn + instructions how to fix denied permissions
-          </div>
-        </div>
+      <main className="flex flex-col gap-2 py-2">
+        <Section>
+          <h4 className="font-bold text-xl">Supported section</h4>
 
-        <div className="space-y-2">
+          <Tile>
+            Are Web Push Notification supported:
+            {isSupported ? " ✅" : " ❌"}
+          </Tile>
+        </Section>
+
+        <Section>
+          <h4 className="font-bold text-xl">Permissions section</h4>
+
+          <Tile>
+            Current Notification permission status:
+            {isUserPermissionGranted ? " ✅" : " ❌"}
+          </Tile>
+          <Tile>
+            Enable permissions btn + instructions how to fix denied permissions
+          </Tile>
+        </Section>
+
+        <Section>
           <h4 className="font-bold text-xl">Subscription section</h4>
-          <div>Current subscription status: {isSubscribed ? " ✅" : " ❌"}</div>
-          <div>Subscribe / Unsubscribe toggle</div>
-        </div>
-      </section>
+
+          <Tile>
+            Current subscription status: {isSubscribed ? " ✅" : " ❌"}
+          </Tile>
+          <Tile>Subscribe / Unsubscribe toggle</Tile>
+        </Section>
+      </main>
     </article>
   );
 };
+
+const Section = classed.section("space-y-2");
+const Tile = classed.div("p-1 bg-gray-200");

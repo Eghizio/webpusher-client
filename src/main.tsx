@@ -6,13 +6,16 @@ import { NavigationContextProvider } from "@/context/NavigationContext.tsx";
 import { UserContextProvider } from "./context/UserContext";
 
 import { register } from "register-service-worker";
+import { NotificationsContextProvider } from "./context/NotificationsContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <UserContextProvider>
-      <NavigationContextProvider>
-        <App />
-      </NavigationContextProvider>
+      <NotificationsContextProvider>
+        <NavigationContextProvider>
+          <App />
+        </NavigationContextProvider>
+      </NotificationsContextProvider>
     </UserContextProvider>
   </StrictMode>
 );

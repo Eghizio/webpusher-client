@@ -2,12 +2,12 @@ import { publicVapidKey } from "./WebPush.config";
 import { getServiceWorkerRegistration } from "./WebPush.utils";
 
 export class WebPush {
-  static async getSubscription() {
+  static async getSubscription(): Promise<PushSubscription | null> {
     const registration = await getServiceWorkerRegistration();
     return registration.pushManager.getSubscription();
   }
 
-  static async subscribe() {
+  static async subscribe(): Promise<PushSubscription> {
     const registration = await getServiceWorkerRegistration();
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
@@ -17,13 +17,13 @@ export class WebPush {
     return subscription;
   }
 
-  static async unsubscribe() {
+  static async unsubscribe(): Promise<boolean> {
     const subscription = await WebPush.getSubscription();
     return subscription ? subscription.unsubscribe() : false;
   }
 
   // Todo: Test and handle properly.
-  static async requestWebPushPermissionFromUser() {
+  static async requestWebPushPermissionFromUser(): Promise<void> {
     return new Promise(function (resolve, reject) {
       const permissionResult = Notification.requestPermission((result) => {
         resolve(result);

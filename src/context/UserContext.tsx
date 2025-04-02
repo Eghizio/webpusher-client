@@ -31,6 +31,7 @@ type WithChildren = {
 };
 
 export const UserContextProvider = ({ children }: WithChildren) => {
+  // Todo: Ensure proper values are stored and the TS types.
   const [user, setUser] = useState<User | null>(null);
 
   const registerUser = useCallback(
