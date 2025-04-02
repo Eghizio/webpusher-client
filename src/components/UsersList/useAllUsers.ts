@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { User } from "./types"; // Todo: extract type
 import { Api } from "@/api/Api";
-
-const sleep = (ms = 3_000) => new Promise((r) => setTimeout(r, ms)); // to utils
+import { sleep } from "@/lib/utils";
 
 // Todo: Refactor to legal states. data | loading | error.
 // Memory leak - requires AbortController.

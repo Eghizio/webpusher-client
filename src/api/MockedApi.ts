@@ -1,5 +1,6 @@
 import { User } from "@/components/UsersList/types";
 import { HttpClient } from "./HttpClient";
+import { sleep } from "@/lib/utils";
 
 // const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
 const API_URL = "http://localhost:3000/api/v1";
@@ -8,7 +9,6 @@ const headers = { "Content-Type": "application/json" };
 export const Http = new HttpClient(API_URL, headers);
 
 /* Mocked API */
-const sleep = async (ms = 1_500) => new Promise((r) => setTimeout(r, ms));
 const mockResponse = async <T>(response: T) => sleep().then(() => response);
 
 export class MockedApi {
