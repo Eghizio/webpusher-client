@@ -33,8 +33,7 @@ export const Broadcast = ({}: Props) => {
       <Title left={<Megaphone size={26} />}>Broadcast</Title>
 
       <section>
-        <form className="space-y-4" onSubmit={onSubmit} autoComplete="off">
-          {/* <div className="space-y-2"> */}
+        <form onSubmit={onSubmit} autoComplete="off">
           <div className="flex flex-col gap-2 py-4">
             <label
               htmlFor="message"
