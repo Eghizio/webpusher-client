@@ -1,18 +1,17 @@
+import { useState } from "react";
 import { Megaphone } from "lucide-react";
 // import { MessageCircleHeart } from "lucide-react";
-import { Title } from "../Title/Title";
-import { useAllUsers } from "../UsersList/useAllUsers";
-import { useState } from "react";
+import { Title } from "@/components/Title/Title";
 import { Api } from "@/api/Api";
+import { useUsers } from "@/hooks/useUsers";
 
 interface Props {}
 
 export const Broadcast = ({}: Props) => {
-  const [users] = useAllUsers();
+  const { data: users } = useUsers();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onBroadcast = async (recipient: string, message: string) => {
-    // alert(`${recipient} -> ${message}`);
     if (recipient === "global") {
       return Api.broadcast(message).then(console.log).catch(console.error);
     }
@@ -56,11 +55,12 @@ export const Broadcast = ({}: Props) => {
               className="p-2 rounded-md border"
             >
               <option value="global">To everybody</option>
-              {users.map(({ id, username }) => (
-                <option key={id} value={id}>
-                  {username}
-                </option>
-              ))}
+              {users &&
+                users.map(({ id, username }) => (
+                  <option key={id} value={id}>
+                    {username}
+                  </option>
+                ))}
             </select>
 
             <input

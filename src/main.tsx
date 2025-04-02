@@ -1,22 +1,29 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
 import "@/index.css";
 import { App } from "@/App.tsx";
 import { NavigationContextProvider } from "@/context/NavigationContext.tsx";
-import { UserContextProvider } from "./context/UserContext";
+import { UserContextProvider } from "@/context/UserContext";
+import { NotificationsContextProvider } from "@/context/NotificationsContext";
 
 import { register } from "register-service-worker";
-import { NotificationsContextProvider } from "./context/NotificationsContext";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <UserContextProvider>
-      <NotificationsContextProvider>
-        <NavigationContextProvider>
-          <App />
-        </NavigationContextProvider>
-      </NotificationsContextProvider>
-    </UserContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <UserContextProvider>
+        <NotificationsContextProvider>
+          <NavigationContextProvider>
+            <App />
+          </NavigationContextProvider>
+        </NotificationsContextProvider>
+      </UserContextProvider>
+    </QueryClientProvider>
   </StrictMode>
 );
 
