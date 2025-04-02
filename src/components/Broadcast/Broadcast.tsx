@@ -3,6 +3,7 @@ import { Megaphone } from "lucide-react";
 import { Title } from "../Title/Title";
 import { useAllUsers } from "../UsersList/useAllUsers";
 import { useState } from "react";
+import { Api } from "@/api/Api";
 
 interface Props {}
 
@@ -11,7 +12,14 @@ export const Broadcast = ({}: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onBroadcast = async (recipient: string, message: string) => {
-    alert(`${recipient} -> ${message}`);
+    // alert(`${recipient} -> ${message}`);
+    if (recipient === "global") {
+      return Api.broadcast(message).then(console.log).catch(console.error);
+    }
+
+    return Api.broadcastToUser(recipient, message)
+      .then(console.log)
+      .catch(console.error);
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
