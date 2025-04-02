@@ -45,6 +45,7 @@ const avatars = Array.from({ length: 8 }, (_, i) => i + 1).flatMap((n) => [
 const avatar = avatars[Math.floor(Math.random() * avatars.length)];
 
 export const Layout = ({ children }: { children: ReactNode }) => {
+  const { navigateTo } = useNavigation();
   const { user } = useUser();
 
   // Todo: Clicking Logo navigates to Home/Dashboard, Clicking User navigates to Settings
@@ -53,7 +54,12 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       {/* Sidebar for desktop */}
       <aside className="hidden md:flex flex-col w-64 bg-white shadow-md">
         <div className="p-4 border-b">
-          <h1 className="text-2xl font-bold">WebPush Demo</h1>
+          <h1
+            className="text-2xl font-bold cursor-pointer"
+            onClick={() => navigateTo(Page.Dashboard)}
+          >
+            WebPush Demo
+          </h1>
         </div>
 
         <nav className="flex-1 p-4">
@@ -89,9 +95,17 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         <header className="bg-white shadow-sm p-4 flex justify-between items-center">
-          <h1 className="text-xl font-semibold md:hidden">WebPush Demo</h1>
+          <h1
+            className="text-xl font-semibold md:hidden cursor-pointer"
+            onClick={() => navigateTo(Page.Dashboard)}
+          >
+            WebPush Demo
+          </h1>
 
-          <div className="flex items-center space-x-4">
+          <div
+            className="flex items-center space-x-4 cursor-pointer"
+            onClick={() => navigateTo(Page.Settings)}
+          >
             <span className="text-sm text-gray-600">
               Welcome, {user?.username ?? "User"}
             </span>
