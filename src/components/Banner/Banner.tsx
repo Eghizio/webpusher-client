@@ -20,9 +20,7 @@ const getVariantStyles = (variant: Variant) => {
 };
 
 export const Banner = ({ children, variant = "info" }: Props) => (
-  <article
-    className={`mb-8 border-l-4 p-4 shadow-sm ${getVariantStyles(variant)}`}
-  >
+  <article className={`border-l-4 p-4 shadow-sm ${getVariantStyles(variant)}`}>
     {children}
   </article>
 );
