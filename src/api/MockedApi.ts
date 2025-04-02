@@ -14,22 +14,30 @@ const mockResponse = async <T>(response: T) => sleep().then(() => response);
 export class MockedApi {
   static async subscribe(subscription: PushSubscription) {
     await sleep();
-    return Http.post("/push/subscribe", { subscription });
+    return Http.post<void, { subscription: PushSubscription }>(
+      "/push/subscribe",
+      { subscription }
+    );
   }
 
   static async unsubscribe(subscription: PushSubscription) {
     await sleep();
-    return Http.post("/push/unsubscribe", { subscription });
+    return Http.post<void, { subscription: PushSubscription }>(
+      "/push/unsubscribe",
+      { subscription }
+    );
   }
 
   static async broadcast(message: string) {
     await sleep();
-    return Http.post("/push/broadcast", { message });
+    return Http.post<void, { message: string }>("/push/broadcast", { message });
   }
 
   static async broadcastToUser(userId: string, message: string) {
     await sleep();
-    return Http.post(`/push/broadcast/${userId}`, { message });
+    return Http.post<void, { message: string }>(`/push/broadcast/${userId}`, {
+      message,
+    });
   }
 
   static async registerUser(username: string) {

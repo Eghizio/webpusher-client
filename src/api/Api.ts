@@ -11,19 +11,27 @@ const Http = new HttpClient(API_URL, headers);
 
 class Api {
   static async subscribe(subscription: PushSubscription) {
-    return Http.post("/push/subscribe", { subscription });
+    return Http.post<void, { subscription: PushSubscription }>(
+      "/push/subscribe",
+      { subscription }
+    );
   }
 
   static async unsubscribe(subscription: PushSubscription) {
-    return Http.post("/push/unsubscribe", { subscription });
+    return Http.post<void, { subscription: PushSubscription }>(
+      "/push/unsubscribe",
+      { subscription }
+    );
   }
 
   static async broadcast(message: string) {
-    return Http.post("/push/broadcast", { message });
+    return Http.post<void, { message: string }>("/push/broadcast", { message });
   }
 
   static async broadcastToUser(userId: string, message: string) {
-    return Http.post(`/push/broadcast/${userId}`, { message });
+    return Http.post<void, { message: string }>(`/push/broadcast/${userId}`, {
+      message,
+    });
   }
 
   static async registerUser(username: string) {
@@ -48,3 +56,19 @@ class Api {
 const mocksEnabled = false;
 const ApiClass = mocksEnabled ? MockedApi : Api;
 export { ApiClass as Api };
+
+// // Move to some module.
+// Register
+// interface UserDto {
+//   id: string;
+//   username: string;
+//   tag: string;
+// }
+
+// UserList
+// interface UserDto {
+//   id: string;
+//   username: string;
+//   subscribed: boolean;
+//   createdAt: Date;
+// }

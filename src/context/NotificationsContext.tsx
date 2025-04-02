@@ -1,3 +1,4 @@
+import { Api } from "@/api/Api";
 import { WebPush } from "@/lib/webpush/WebPush";
 import {
   createContext,
@@ -6,16 +7,20 @@ import {
   useEffect,
   useMemo,
   useState,
-  //   useCallback,
-  //   useState,
+  useCallback,
 } from "react";
 // import { Api } from "@/api/Api";
-// import { User } from "@/components/UsersList/types";
 
 export type NotificationsContextValue = {
   isSupported: boolean;
   isUserPermissionGranted: boolean;
   isSubscribed: boolean;
+
+  requestUserPermission: () => Promise<void>;
+  subscribe: () => Promise<void>;
+  unsubscribe: () => Promise<void>;
+
+  getCurrentSubscription: () => Promise<PushSubscription | null>;
 };
 
 const NotificationsContext = createContext<
@@ -50,20 +55,55 @@ export const NotificationsContextProvider = ({ children }: WithChildren) => {
     );
   }, []);
 
-  // Todo: Subscribe / Unsubscribe, Enable Permissions
+  const requestUserPermission = useCallback(
+    () =>
+      WebPush.requestWebPushPermissionFromUser()
+        .then(() => setIsUserPermissionGranted(true))
+        .catch(() => setIsUserPermissionGranted(false)),
+    []
+  );
 
-  //   const registerUser = useCallback(
-  //     async (username: string) => Api.registerUser(username).then(setUser),
-  //     [Api]
-  //   );
+  const subscribe = useCallback(
+    async () =>
+      WebPush.subscribe().then((subscription) => {
+        setIsSubscribed(Boolean(subscription));
+        return Api.subscribe(subscription);
+      }),
+    []
+  );
+
+  const unsubscribe = useCallback(async () => {
+    const subscription = await WebPush.getSubscription();
+    return WebPush.unsubscribe().then(() => {
+      if (subscription) return Api.unsubscribe(subscription);
+    });
+  }, []);
+
+  const getCurrentSubscription = useCallback(async () => {
+    const result = WebPush.getSubscription();
+    setIsSubscribed(Boolean(result));
+    return result;
+  }, []);
 
   const value = useMemo(
     () => ({
       isSupported,
       isUserPermissionGranted,
       isSubscribed,
+      requestUserPermission,
+      subscribe,
+      unsubscribe,
+      getCurrentSubscription,
     }),
-    [isSupported, isUserPermissionGranted, isSubscribed]
+    [
+      isSupported,
+      isUserPermissionGranted,
+      isSubscribed,
+      requestUserPermission,
+      subscribe,
+      unsubscribe,
+      getCurrentSubscription,
+    ]
   );
 
   return (
