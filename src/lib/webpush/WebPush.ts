@@ -38,4 +38,25 @@ export class WebPush {
       }
     });
   }
+
+  static isNotificationSupported(): boolean {
+    const isUnsupported =
+      !("serviceWorker" in navigator) ||
+      !("PushManager" in window) ||
+      !("showNotification" in ServiceWorkerRegistration.prototype);
+
+    return !isUnsupported;
+  }
+
+  static isUserPermissionGranted(): boolean {
+    switch (Notification.permission) {
+      case "granted":
+        return true;
+
+      case "default":
+      case "denied":
+      default:
+        return false;
+    }
+  }
 }
