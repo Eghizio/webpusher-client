@@ -2,9 +2,11 @@ import { classed } from "@tw-classed/react";
 import { Page, useNavigation } from "@/context/NavigationContext";
 import { WebPush } from "@/lib/webpush/WebPush";
 import { Api } from "@/api/Api";
+import { Title } from "../Title/Title";
+import { Bot } from "lucide-react";
 
 const Button = classed.button(
-  "border-2 p-2 border-gray-300 bg-gray-400 hover:bg-gray-600"
+  "flex gap-3 border-2 p-2 border-gray-300 bg-gray-400 hover:bg-gray-600"
 );
 
 export const DebugPanel = () => {
@@ -38,23 +40,29 @@ export const DebugPanel = () => {
   };
 
   return (
-    <section className="border-red-500 border">
-      <br />
-      <br />
-      <h2>Debug</h2>
+    <section className="bg-red-400 flex flex-col gap-2 p-1">
+      <Title left={<Bot size={26} />}>Debug</Title>
 
-      <br />
-      <Button onClick={getCurrentUser}>Get current user</Button>
-      <Button onClick={goToOnboarding}>To Onboarding</Button>
-
-      <br />
-      <br />
-      <Button onClick={enableNotifications}>Enable Notifications ⚙️</Button>
-      <Button onClick={getCurrentSubscription}>
-        Get current Subscription ⭐
+      <Button onClick={getCurrentUser}>
+        <span>🙋</span> Get current user
       </Button>
-      <Button onClick={subscribe}>Subscribe 🔔</Button>
-      <Button onClick={unsubscribe}>Unsubscribe 🔕</Button>
+      <Button onClick={goToOnboarding}>
+        <span>🚀</span> To Onboarding
+      </Button>
+
+      <Button onClick={enableNotifications}>
+        <span>⚙️</span> Enable Notifications
+      </Button>
+      <Button onClick={getCurrentSubscription}>
+        <span>⭐</span> Get current Subscription
+      </Button>
+
+      <Button onClick={subscribe}>
+        <span>🔔</span> Subscribe
+      </Button>
+      <Button onClick={unsubscribe}>
+        <span>🔕</span> Unsubscribe
+      </Button>
     </section>
   );
 };

@@ -1,20 +1,20 @@
 import { Home } from "lucide-react";
 import { DebugPanel } from "@/components/DebugPanel/DebugPanel";
+import { Title } from "@/components/Title/Title";
+import { Broadcast } from "@/components/Broadcast/Broadcast";
 
 export const DashboardPage = () => {
   return (
     <main>
-      <Title />
-      <DebugPanel />
+      <Title left={<Home size={26} />} divider>
+        Dashboard
+      </Title>
+
+      <section className="flex flex-col gap-4 py-2">
+        <DebugPanel />
+
+        <Broadcast />
+      </section>
     </main>
   );
 };
-
-const Title = () => (
-  <h2 className="text-2xl flex items-center gap-2 font-bold">
-    <div className="bg-gray-300 p-2 rounded-full">
-      <Home size={26} />
-    </div>
-    Dashboard
-  </h2>
-);

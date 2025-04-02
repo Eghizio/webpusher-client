@@ -1,16 +1,10 @@
+import { Title } from "@/components/Title/Title";
 import { Settings } from "lucide-react";
 
 export const SettingsPage = () => (
   <main>
-    <Title />
+    <Title left={<Settings size={26} />} divider>
+      Settings
+    </Title>
   </main>
-);
-
-const Title = () => (
-  <h2 className="text-2xl flex items-center gap-2 font-bold">
-    <div className="bg-gray-300 p-2 rounded-full">
-      <Settings size={26} />
-    </div>
-    Settings
-  </h2>
 );

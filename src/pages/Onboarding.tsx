@@ -35,7 +35,7 @@ export const OnboardingPage = () => {
         <form className="space-y-4" onSubmit={onSubmit} autoComplete="off">
           <div className="space-y-2">
             <label
-              htmlFor="name"
+              htmlFor="username"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               What&apos;s your name?
