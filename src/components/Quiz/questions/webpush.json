@@ -1,0 +1,157 @@
+[
+  {
+    "id": 1,
+    "question": "Which API is used to request notification permission in the browser?",
+    "options": [
+      "window.requestNotifications()",
+      "Notification.requestPermission()",
+      "navigator.requestNotification()",
+      "push.requestPermission()"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 2,
+    "question": "What is the purpose of a Service Worker in Web Push implementation?",
+    "options": [
+      "To improve website performance",
+      "To handle push events and display notifications when the page is not active",
+      "To encrypt the notification payload",
+      "To validate user subscriptions"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 3,
+    "question": "Which Node.js library is commonly used for implementing Web Push?",
+    "options": ["node-pusher", "web-push", "node-notifications", "push-api"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 4,
+    "question": "What is VAPID in the context of Web Push notifications?",
+    "options": [
+      "A security protocol for push service authentication",
+      "A compression algorithm for notification payloads",
+      "A visual template system for notifications",
+      "An API for tracking notification delivery"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 5,
+    "question": "Which of these is a best practice for requesting notification permissions?",
+    "options": [
+      "Request permission immediately when the page loads",
+      "Request permission after a user interaction or clear explanation of value",
+      "Repeatedly request permission if the user denies it",
+      "Use a timeout to request permission after 5 seconds"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 6,
+    "question": "What is a PushSubscription object used for?",
+    "options": [
+      "To store notification templates",
+      "To track which notifications have been read",
+      "To uniquely identify a client and allow sending notifications to it",
+      "To configure notification appearance"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 7,
+    "question": "Which backend practice is recommended for handling push subscriptions?",
+    "options": [
+      "Storing subscriptions in memory for faster access",
+      "Sharing subscription endpoint URLs publicly for debugging",
+      "Storing subscriptions in a database and implementing expiration/cleanup",
+      "Using the same VAPID keys for all your applications"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 8,
+    "question": "What is the maximum payload size recommended for Web Push notifications?",
+    "options": ["Unlimited", "Around 4KB", "Around 50KB", "Around 1MB"],
+    "correctAnswer": 1
+  },
+  {
+    "id": 9,
+    "question": "Which practice helps prevent notification fatigue?",
+    "options": [
+      "Sending multiple notifications for important updates",
+      "Sending notifications at random times",
+      "Providing user controls for notification types and frequency",
+      "Using animated GIFs in notifications"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 10,
+    "question": "What is a recommended pattern for handling failed push deliveries on the backend?",
+    "options": [
+      "Ignore failed deliveries, as they are not important",
+      "Immediately retry sending the same notification",
+      "Implement exponential backoff for retries and remove invalid subscriptions",
+      "Switch to email notifications instead"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 11,
+    "question": "Which of the following is NOT a valid option for the Notification API's actions array?",
+    "options": [
+      "{ action: 'reply', title: 'Reply' }",
+      "{ action: 'archive', title: 'Archive' }",
+      "{ action: 'redirect', url: '/dashboard' }",
+      "{ action: 'close', title: 'Dismiss' }"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 12,
+    "question": "What is the recommended way to test Web Push notifications during development?",
+    "options": [
+      "Use production credentials on development environments",
+      "Use dedicated test VAPID keys and debug tools like Chrome DevTools",
+      "Send real notifications to all users with a 'test' flag",
+      "Skip testing as push notifications are not critical"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 13,
+    "question": "In a Node.js backend, how should you store VAPID private keys?",
+    "options": [
+      "In your GitHub repository for version control",
+      "Directly in your application code",
+      "As environment variables or in a secure key management system",
+      "In a public configuration file"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 14,
+    "question": "Which frontend practice improves the user experience of Web Push notifications?",
+    "options": [
+      "Automatically subscribing users without asking",
+      "Providing clear notification preferences in the UI with examples of content",
+      "Using the same generic message for all notification types",
+      "Sending the maximum number of daily notifications allowed"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 15,
+    "question": "What should your service worker do if it receives a push event with no data?",
+    "options": [
+      "Ignore it completely",
+      "Crash intentionally to signal an error",
+      "Show a generic notification or fetch content from your server",
+      "Unregister itself as the push event is invalid"
+    ],
+    "correctAnswer": 2
+  }
+]

@@ -17,6 +17,7 @@ self.addEventListener("push", (event) => {
     icon: "/assets/favicon.png",
     image: "https://cataas.com/cat",
     tag: Math.random().toString(),
+    data: { url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
   });
 
   /* https://web.dev/articles/push-notifications-handling-messages#wait_until

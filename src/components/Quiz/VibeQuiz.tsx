@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { questions } from "./questions";
+// import reactQuestions from "./questions/react.json";
+import webpushQuestions from "./questions/webpush.json";
+
+const questions = webpushQuestions; // Todo: Do not upload questions yet. Upload them before the event.
 
 interface Question {
   id: number;
