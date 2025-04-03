@@ -21,6 +21,10 @@ export const DebugPanel = () => {
     getCurrentSubscription,
   } = useNotifications();
 
+  const isDebugEnabled = window.location.search.includes("debug");
+
+  if (!isDebugEnabled) return null;
+
   const getCurrentUser = () => console.log(user);
 
   const goToOnboarding = () => navigateTo(Page.Onboarding);
