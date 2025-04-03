@@ -6,7 +6,9 @@ const prodKey =
   "BCGyOvMTw0pEduUkCvczWt_RppgvegPAvBH20FKYyL0Izgi3TifO4kl-g7bVPe3g6khF4w65gcXxFteMjQNn9v0";
 
 const getKey = (hostname: string) => {
-  const isProd = hostname.includes("frog02-30476.wykr.es");
+  const isProd =
+    hostname.includes("frog02-30476.wykr.es") ||
+    hostname.includes("webpusher-client.vercel.app");
   const isDev =
     hostname.includes("localhost") || hostname.includes("127.0.0.1");
 
