@@ -3,8 +3,14 @@ import { classed } from "@tw-classed/react";
 import { BellOff, BellRing, Settings2 } from "lucide-react";
 // import { BellDot } from "lucide-react";
 import { useNotifications } from "@/context/NotificationsContext";
-import { Banner } from "@/components/Banner/Banner";
 import { Toggle } from "./Toggle";
+import {
+  NotificationsNotSupportedBanner,
+  NotificationsSupportedBanner,
+  PermissionDeniedBanner,
+  PermissionGrantedBanner,
+  PermissionRequiredBanner,
+} from "../banners";
 
 export const NotificationSettings = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,18 +40,9 @@ export const NotificationSettings = () => {
     <article>
       <main className="flex flex-col gap-8 py-2">
         {isSupported ? (
-          <Banner variant="success">
-            <Title>
-              Web Push notifications are supported on your device & browser ✨
-            </Title>
-          </Banner>
+          <NotificationsSupportedBanner />
         ) : (
-          <Banner variant="danger">
-            <Title>
-              Web Push notifications are not supported on your device & browser
-              😭
-            </Title>
-          </Banner>
+          <NotificationsNotSupportedBanner />
         )}
 
         <Section>
@@ -55,13 +52,13 @@ export const NotificationSettings = () => {
             Web Push Subscription
           </Title>
 
-          <Tile className="justify-between">
+          <div className="p-1 flex items-center justify-between">
             <span>
               You are currently {isSubscribed ? "subscribed" : "not subscribed"}
             </span>
 
             <Toggle isChecked={isSubscribed} onChange={toggleSubscription} />
-          </Tile>
+          </div>
         </Section>
 
         <Section>
@@ -70,18 +67,10 @@ export const NotificationSettings = () => {
           </Title>
 
           {isUserPermissionGranted ? (
-            <Banner variant="success">
-              <Title>
-                You have granted permission for Web Push notifications 👍
-              </Title>
-            </Banner>
+            <PermissionGrantedBanner />
           ) : (
             <>
-              <Banner variant="warning">
-                <Title>
-                  You need to grant permission for Web Push notifications ⬇️
-                </Title>
-              </Banner>
+              <PermissionRequiredBanner />
 
               <Button
                 type="button"
@@ -93,13 +82,7 @@ export const NotificationSettings = () => {
             </>
           )}
 
-          <Banner variant="info">
-            <Title>In case of denied notifications</Title>
-            <p>
-              Please go to your browser settings and revoke the denied
-              permissions to the initial state.
-            </p>
-          </Banner>
+          <PermissionDeniedBanner />
         </Section>
       </main>
     </article>
@@ -108,7 +91,6 @@ export const NotificationSettings = () => {
 
 const Section = classed.section("space-y-4");
 const Title = classed.h3("font-semibold text-lg flex items-center gap-1");
-const Tile = classed.div("p-1 flex items-center");
 const Button = classed.button(
   "w-full bg-blue-500 text-white p-2 rounded-md  disabled:bg-gray-500 disabled:brightness-50"
 );

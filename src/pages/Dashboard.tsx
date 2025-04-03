@@ -3,12 +3,16 @@ import { DebugPanel } from "@/components/DebugPanel/DebugPanel";
 import { Title } from "@/components/Title/Title";
 import { Broadcast } from "@/components/Broadcast/Broadcast";
 import { Quiz } from "@/components/Quiz/Quiz";
-import { Banner } from "@/components/Banner/Banner";
-import { Page, useNavigation } from "@/context/NavigationContext";
-import { WebPush } from "@/lib/webpush/WebPush";
+import { useNotifications } from "@/context/NotificationsContext";
+import {
+  NotificationsDisabledBanner,
+  NotificationsNotSupportedBanner,
+  NotificationsSupportedBanner,
+  StayInTouchBanner,
+} from "@/components/banners";
 
 export const DashboardPage = () => {
-  const { navigateTo } = useNavigation();
+  const { isSupported, isUserPermissionGranted } = useNotifications();
 
   return (
     <main>
@@ -19,30 +23,17 @@ export const DashboardPage = () => {
       <section className="flex flex-col gap-4 py-2 mb-24">
         <DebugPanel />
 
-        {WebPush.isUserPermissionGranted() ? null : (
-          <Banner variant="warning">
-            <h3 className="font-semibold mb-1">
-              Seems like your Notifications are disabled.
-            </h3>
-            <p>
-              Please enable them in <strong>Settings</strong> for full demo
-              experience 🎉
-            </p>
-          </Banner>
+        {isSupported ? (
+          <NotificationsSupportedBanner />
+        ) : (
+          <NotificationsNotSupportedBanner />
         )}
+
+        {isUserPermissionGranted ? null : <NotificationsDisabledBanner />}
 
         <Broadcast />
 
-        <Banner variant="info">
-          <h3 className="font-semibold mb-1">Stay in touch with everybody!</h3>
-          <p>Literally. It is just one tap away 😃</p>
-          <span
-            className="underline text-blue-400"
-            onClick={() => navigateTo(Page.Users)}
-          >
-            Take me there!
-          </span>
-        </Banner>
+        <StayInTouchBanner />
 
         <Quiz />
       </section>
