@@ -4,7 +4,7 @@ import { MockedApi } from "./MockedApi";
 import { User } from "@/components/UsersList/types";
 
 // const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
-const API_URL = "http://localhost:3000/api/v1";
+const API_URL = `${import.meta.env.VITE_API_HOST}/api/v1`;
 const headers = { "Content-Type": "application/json" };
 
 const Http = new HttpClient(API_URL, headers);
