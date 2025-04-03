@@ -1,21 +1,27 @@
 interface Props {
   children: string;
   left?: React.ReactNode;
-  divider?: boolean;
+  primary?: boolean;
 }
 
-export const Title = ({ children: title, left, divider = false }: Props) => (
+export const Title = ({ children: title, left, primary = false }: Props) => (
   <>
     <h2 className="text-2xl flex items-center gap-2 font-bold">
       {left && (
-        <div className="bg-gray-300 p-2 rounded-full w-10 h-10 flex items-center justify-center">
+        <div
+          className={
+            primary
+              ? "w-10 h-10 flex items-center justify-center bg-gray-300 p-2 rounded-full "
+              : "w-10 h-10 flex items-center justify-center"
+          }
+        >
           {left}
         </div>
       )}
 
       <span>{title}</span>
     </h2>
-    {divider ? <Divider /> : null}
+    {primary ? <Divider /> : null}
   </>
 );
 

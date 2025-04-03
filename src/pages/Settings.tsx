@@ -4,7 +4,7 @@ import { Settings } from "lucide-react";
 
 export const SettingsPage = () => (
   <main>
-    <Title left={<Settings size={26} />} divider>
+    <Title left={<Settings size={26} />} primary>
       Settings
     </Title>
 

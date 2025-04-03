@@ -12,7 +12,7 @@ export const DashboardPage = () => {
 
   return (
     <main>
-      <Title left={<Home size={26} />} divider>
+      <Title left={<Home size={26} />} primary>
         Dashboard
       </Title>
 
@@ -25,8 +25,8 @@ export const DashboardPage = () => {
               Seems like your Notifications are disabled.
             </h3>
             <p>
-              Please enable them <strong>bellow</strong> or in{" "}
-              <strong>Settings</strong> for full demo experience 🎉
+              Please enable them in <strong>Settings</strong> for full demo
+              experience 🎉
             </p>
           </Banner>
         )}
