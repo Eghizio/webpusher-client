@@ -5,10 +5,7 @@ import { Broadcast } from "@/components/Broadcast/Broadcast";
 import { Quiz } from "@/components/Quiz/Quiz";
 import { Banner } from "@/components/Banner/Banner";
 import { Page, useNavigation } from "@/context/NavigationContext";
-import { NotificationSettings } from "@/components/NotificationSettings/NotificationSettings";
 import { WebPush } from "@/lib/webpush/WebPush";
-
-const debugEnabled = true;
 
 export const DashboardPage = () => {
   const { navigateTo } = useNavigation();
@@ -20,16 +17,7 @@ export const DashboardPage = () => {
       </Title>
 
       <section className="flex flex-col gap-4 py-2 mb-24">
-        {debugEnabled && <DebugPanel />}
-
-        {WebPush.isNotificationSupported() ? null : (
-          <Banner variant="danger">
-            <h3 className="font-semibold mb-1">
-              We are sorry but your device does not support Web Push
-              Notifications.
-            </h3>
-          </Banner>
-        )}
+        <DebugPanel />
 
         {WebPush.isUserPermissionGranted() ? null : (
           <Banner variant="warning">
@@ -42,7 +30,6 @@ export const DashboardPage = () => {
             </p>
           </Banner>
         )}
-        <NotificationSettings />
 
         <Broadcast />
 
