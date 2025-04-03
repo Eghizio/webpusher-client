@@ -29,7 +29,9 @@ export const Broadcast = () => {
     // @ts-ignore
     const message = form.elements["message"].value;
 
-    onBroadcast(recipient, message).finally(() => setIsSubmitting(false));
+    onBroadcast(recipient, message).finally(() =>
+      setTimeout(() => setIsSubmitting(false), 10_000)
+    );
   };
 
   return (
