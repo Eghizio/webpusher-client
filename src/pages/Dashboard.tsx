@@ -12,31 +12,37 @@ import {
 } from "@/components/banners";
 
 export const DashboardPage = () => {
-  const { isSupported, isUserPermissionGranted } = useNotifications();
-
   return (
     <main>
       <Title left={<Home size={26} />} primary>
         Dashboard
       </Title>
 
-      <section className="flex flex-col gap-4 py-2 mb-24">
+      <section className="flex flex-col gap-6 py-2 mb-24">
         <DebugPanel />
-
-        {isSupported ? (
-          <NotificationsSupportedBanner />
-        ) : (
-          <NotificationsNotSupportedBanner />
-        )}
-
-        {isUserPermissionGranted ? null : <NotificationsDisabledBanner />}
+        <Banners />
 
         <Broadcast />
-
         <StayInTouchBanner />
 
         <Quiz />
       </section>
     </main>
+  );
+};
+
+const Banners = () => {
+  const { isSupported, isUserPermissionGranted } = useNotifications();
+
+  return (
+    <>
+      {isSupported ? (
+        <NotificationsSupportedBanner />
+      ) : (
+        <NotificationsNotSupportedBanner />
+      )}
+
+      {!isUserPermissionGranted && <NotificationsDisabledBanner />}
+    </>
   );
 };
