@@ -1,0 +1,27 @@
+{
+  "short_name": "Client Web Push Demo",
+  "name": "Client Web Push Demo",
+  "icons": [
+    {
+      "src": "/assets/favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/assets/favicon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/favicon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "scope": "/",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#317EFB",
+  "background_color": "#FFA500"
+}
