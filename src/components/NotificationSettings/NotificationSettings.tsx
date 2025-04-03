@@ -32,8 +32,6 @@ export const NotificationSettings = () => {
 
   return (
     <article>
-      {/* <Title left={<BellDot size={26} />}>Notification Settings</Title> */}
-
       <main className="flex flex-col gap-8 py-2">
         {isSupported ? (
           <Banner variant="success">
@@ -52,7 +50,7 @@ export const NotificationSettings = () => {
 
         <Section>
           <Title>
-            {isSubscribed ? <BellRing /> : <BellOff size={22} />}
+            {isSubscribed ? <BellRing size={22} /> : <BellOff size={22} />}
             {/* {isSubscribed ? <BellDot size={22} /> : <BellOff size={22} />} */}
             Web Push Subscription
           </Title>
