@@ -22,8 +22,8 @@ export const NotificationSettings = () => {
     requestUserPermission().finally(() => setIsSubmitting(false));
   };
 
-  const toggleSubscription = async (enabled: boolean) => {
-    if (enabled) {
+  const toggleSubscription = async (checked: boolean) => {
+    if (checked) {
       await subscribe();
     } else {
       await unsubscribe();
@@ -62,7 +62,7 @@ export const NotificationSettings = () => {
               You are currently {isSubscribed ? "subscribed" : "not subscribed"}
             </span>
 
-            <Toggle isEnabled={isSubscribed} onChange={toggleSubscription} />
+            <Toggle isChecked={isSubscribed} onChange={toggleSubscription} />
           </Tile>
         </Section>
 
