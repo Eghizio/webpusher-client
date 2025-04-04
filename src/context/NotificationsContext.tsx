@@ -47,7 +47,10 @@ export const NotificationsContextProvider = ({ children }: WithChildren) => {
   const [isUserPermissionGranted, setIsUserPermissionGranted] = useState(false);
 
   useEffect(() => {
-    setIsSupported(WebPush.isNotificationSupported());
+    const isNotificationSupported = WebPush.isNotificationSupported();
+    setIsSupported(isNotificationSupported);
+    if (!isNotificationSupported) return;
+
     setIsUserPermissionGranted(WebPush.isUserPermissionGranted());
 
     WebPush.getSubscription().then((subscription) =>
