@@ -34,3 +34,11 @@ const starWarsThemeOption = {
     40, 500,
   ],
 };
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const url =
+    event?.notification?.data?.url ??
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+  event.waitUntil(clients.openWindow(url));
+});
