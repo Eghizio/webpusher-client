@@ -1,14 +1,25 @@
+import { Token } from "./Token";
+
 type Headers = Record<string, string>;
 type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 export class HttpClient {
   constructor(private apiUrl: string, private headers: Headers = {}) {}
 
+  // Todo: Add fallback to auth Bearer header on the backend (cookie ?? header).
+  private withAuthorizationToken(headers: Headers) {
+    const token = Token.get();
+
+    return token ? { ...headers, Authorization: token } : headers;
+  }
+
   async request(endpoint: string, method?: HttpMethod, body?: any) {
     const url = `${this.apiUrl}${endpoint}`;
 
+    const headers = this.withAuthorizationToken(this.headers);
+
     return fetch(url, {
-      headers: this.headers,
+      headers,
       method,
       body: JSON.stringify(body),
       credentials: "include", // Todo: Configure.

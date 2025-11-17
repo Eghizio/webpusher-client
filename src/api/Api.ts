@@ -2,6 +2,7 @@ import { HttpClient } from "./HttpClient";
 // import type { PushSubscription } from "@/model";
 import { MockedApi } from "./MockedApi";
 import { User } from "@/components/UsersList/types";
+import { Token } from "./Token";
 
 // const API_URL = "/api/v1"; // "http://localhost:3000/api/v1"
 const API_URL = `${import.meta.env.VITE_API_HOST}/api/v1`;
@@ -35,9 +36,18 @@ class Api {
   }
 
   static async registerUser(username: string) {
-    return Http.post<User, { username: string }>("/users/register", {
-      username,
-    });
+    const response = await Http.post<User, { username: string }>(
+      "/users/register",
+      {
+        username,
+      }
+    );
+
+    if (response?.id) {
+      Token.set(response.id);
+    }
+
+    return response;
   }
 
   static async getUsers() {
@@ -45,7 +55,13 @@ class Api {
   }
 
   static async getCurrentUser() {
-    return Http.get("/users/me");
+    const response = await Http.get<User>("/users/me");
+
+    if (response?.id) {
+      Token.set(response.id);
+    }
+
+    return response;
   }
 
   static async pokeUser(userId: string) {
